@@ -1,44 +1,44 @@
-# Desktop Cleanup Script (macOS)
+# 🖥️ doineedtoupgrade (macOS)
 
-A simple Bash script that organizes your messy macOS Desktop into categorized folders: `Documents`, `Media`, and `Other`. Designed for engineers, makers, and tinkerers who love clean output and satisfying automation.
+A readable Bash script that shows you your Mac’s current system info — like memory, CPU, disk space, macOS version, and battery — in plain, human-friendly language.
+
+Made for curious users, engineers, and makers who want quick clarity without digging through technical menus.
 
 ---
+
 ## 📦 What's Included
 
-- `desktop_cleanup.sh`: Sorts files on your Desktop into subfolders inside `Desktop Cleanup`.
-- `desktop_restore.sh`: Restores all files from the subfolders back to your Desktop.
+- `system_info.sh`: A lightweight script that displays your Mac’s hardware, software, and power status in grouped sections with clean output.
 
 ---
 
 ## 🛠️ How It Works
 
-The script checks for a folder called `Desktop Cleanup`. If it doesn't exist, it creates it — along with three subdirectories:
+When you run the script, it pulls information directly from macOS system commands and presents it in clearly labeled categories:
 
-- `Documents`: `.pdf`, `.docx`, `.txt`, `.xlsx`, etc.
-- `Media`: `.jpg`, `.png`, `.mp4`, `.mp3`, etc.
-- `Other`: Anything else
+- **Hardware**: RAM, CPU, and Mac model
+- **Storage**: Disk space used and available
+- **Software**: macOS version and uptime
+- **Network**: Logged-in user and IP address
+- **Power**: Battery percentage and charging status
 
-Each file on your Desktop is moved into the appropriate folder based on its extension.
+No dependencies. No configuration. Just info.
 
 ---
 
 ## ⚙️ How to Use
 
-1. **Download both scripts**:
-    - `desktop_cleanup.sh`
-    - `desktop_restore.sh`
+1. Download the script:
+   - `system_info.sh`
 
-2. Place them on your **Desktop**.
-
-3. Make them executable:
+2. Make it executable:
    ```bash
-   chmod +x ~/Desktop/desktop_cleanup.sh
-   chmod +x ~/Desktop/desktop_restore.sh
+   chmod +x system_info.sh
    ```
 
-4. Run the cleanup script:
+3. Run the script:
    ```bash
-   ~/Desktop/desktop_cleanup.sh
+   ./system_info.sh
    ```
 
 ---
@@ -46,44 +46,41 @@ Each file on your Desktop is moved into the appropriate folder based on its exte
 ## 🧾 Example Output
 
 ```
-==> Checking for Desktop Cleanup folder...
-No Desktop Cleanup folder detected. Creating structure...
+===============================
+🖥️  BASIC MAC SYSTEM INFO
+===============================
 
-==> Scanning Desktop files and transferring...
+🔧 Hardware:
+  🧠 Memory (RAM):         16 GB
+  ⚙️  Processor (CPU):      Apple M1 Pro
+  💻 Mac Model Identifier: MacBookPro18,3
 
-========== RESULTS ==========
+💽 Storage:
+  📦 Disk Space:
+    Total:     494 GB
+    Used:      210 GB
+    Available: 284 GB
 
-Documents:
-Moved resume.docx to Documents (0.32 MB)
+🧾 Software:
+  macOS Version: 13.6.1
+  ⏱️  Uptime:       2 days, 5:23
 
-Media:
-Moved photo.png to Media (1.21 MB)
+🌐 Network:
+  👤 Current User:    amiel
+  🌍 Local IP Address: 192.168.1.24
 
-Other:
-Moved debug.log to Other (0.01 MB)
+🔋 Power:
+  Battery: 84% (charging)
 
-========== SUMMARY ==========
-Documents: 1 file(s), 0.32 MB
-Media:     1 file(s), 1.21 MB
-Other:     1 file(s), 0.01 MB
-
-Desktop cleanup complete.
+===============================
 ```
 
 ---
 
 ## 🔁 If Something Goes Wrong
 
-If the cleanup didn’t work how you expected — no worries.
-
-Just run:
-```bash
-~/Desktop/desktop_restore.sh
-```
-
-It will move everything back to your Desktop and ask if you want to delete the cleanup folder.
+No system changes are made — this is read-only. If anything looks off, you can simply re-run the script or review it before use. It’s yours to modify, expand, and learn from.
 
 ---
 
 ### 🧙🏾‍♂️‍ Created by [Amiel Terry](https://amielterry.me) & Arcane Systems LLC
-
