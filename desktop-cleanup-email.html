@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Desktop Cleanup Email</title>
+</head>
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color: #222; line-height: 1.6; max-width: 650px; margin: 40px auto; padding: 0 20px;">
+
+<h2>👋 <strong>Good morning ladies and gentlemen,</strong></h2>
+
+<div style="padding-left: 20px;">
+    <p>Being that I’m around my 90-day mark at Seitel — and in the Friday spirit — I come bearing gifts.</p>
+    <p>Let’s be honest... I’ve “innocently” noticed that some desktops around here remind me of my college locker-room 👀 lol.</p>
+</div>
+
+<h3><strong>BUT FEAR NOT — I’ve got you.</strong></h3>
+
+<div style="padding-left: 20px;">
+    <p>I created a little script for both Mac and Windows users that automatically organizes your desktop — moving files into a tidy folder for you to sort through later (or not… no judgment 😄).</p>
+    <p>The idea? So we can wrap up each day — or head into the weekend — with a fresh slate and a clean desktop for Monday.</p>
+    <p>🤔 Think of it like making your bed before you leave the house. Yeah... it's kinda like that.</p>
+    <p>Below you’ll find quick, simple instructions along with a demo to show exactly how it works. The scripts are attached — feel free to run it and enjoy the calm.</p>
+</div>
+
+<h3>👇 <strong>Watch it in action:</strong></h3>
+<img src="https://i.imgur.com/Oec9WFK.gif" alt="Demo GIF" style="width: 100%; max-width: 600px; border-radius: 8px; margin: 20px 0;" />
+
+<h3>🛠 <strong>For WINDOWS USERS:</strong></h3>
+
+<div style="padding-left: 20px;">
+    <ol>
+        <li>Download the <em>.ps1</em> files:
+            <ul>
+                <li><em>desktop_cleanup.ps1</em></li>
+                <li><em>desktop_restore.ps1</em></li>
+            </ul>
+        </li>
+        <li>Open PowerShell and navigate to your Desktop. Example:</li>
+    </ol>
+
+    <pre style="background: #f5f5f5; padding: 10px; border-radius: 6px; font-family: monospace;">
+cd "C:\Users\YOURNAME\OneDrive - Seitel Systems, LLC\Desktop"
+      </pre>
+
+    <p><strong>🔁 Replace <code>YOURNAME</code> with your own Windows username</strong></p>
+
+    <ol start="3">
+        <li>Run:</li>
+    </ol>
+
+    <pre style="background: #f5f5f5; padding: 10px; border-radius: 6px; font-family: monospace;">
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+./desktop_cleanup.ps1
+      </pre>
+
+    <p>Your desktop is now clean! Use <em>desktop_restore.ps1</em> to undo if needed.</p>
+</div>
+
+<h3>🍏 <strong>Mac Users (You studs — proud of you 😎)</strong></h3>
+
+<div style="padding-left: 20px;">
+    <ol>
+        <li>Download the <em>.sh</em> files:
+            <ul>
+                <li><em>desktop_cleanup.sh</em></li>
+                <li><em>desktop_restore.sh</em></li>
+            </ul>
+        </li>
+        <li>Open Terminal and run:</li>
+    </ol>
+
+    <pre style="background: #f5f5f5; padding: 10px; border-radius: 6px; font-family: monospace;">
+chmod +x ~/Desktop/desktop_cleanup.sh
+./desktop_cleanup.sh
+      </pre>
+</div>
+
+<hr style="border: none; border-top: 1px solid #e0e0e0; margin: 32px 0;">
+
+<p>💬 Any questions, feel free to reach out. (Also if you don't like it and want to restore to your messy ways, you can run the <em>desktop_restore.ps1</em> or <em>desktop_restore.sh</em> to reset.)</p>
+
+<p>Happy cleaning!<br><strong>— Amiel 🧙🏾</strong></p>
+
+</body>
+</html>
