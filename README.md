@@ -1,86 +1,104 @@
-# 🖥️ doineedtoupgrade (macOS)
+# Desktop Cleanup Script (macOS)
 
-A readable Bash script that shows you your Mac’s current system info — like memory, CPU, disk space, macOS version, and battery — in plain, human-friendly language.
-
-Made for curious users, engineers, and makers who want quick clarity without digging through technical menus.
+This Bash script organizes files on your Mac Desktop into categorized folders based on file type. It helps keep your workspace clean while offering a simple restore script to undo changes.
 
 ---
 
-## 📦 What's Included
+## Features
 
-- `system_info.sh`: A lightweight script that displays your Mac’s hardware, software, and power status in grouped sections with clean output.
-
----
-
-## 🛠️ How It Works
-
-When you run the script, it pulls information directly from macOS system commands and presents it in clearly labeled categories:
-
-- **Hardware**: RAM, CPU, and Mac model
-- **Storage**: Disk space used and available
-- **Software**: macOS version and uptime
-- **Network**: Logged-in user and IP address
-- **Power**: Battery percentage and charging status
-
-No dependencies. No configuration. Just info.
+- Moves files into a `Desktop Cleanup` folder with subfolders:
+    - `Documents` — PDF, Word, Excel, PowerPoint, and text files
+    - `Media` — Images, audio, video files
+    - `Other` — Everything else
+- Calculates file sizes in MB
+- Skips itself (`desktop_cleanup.sh`), the restore script (`desktop_restore.sh`), and the cleanup folder
+- Logs grouped results by file type with a final summary
 
 ---
 
-## ⚙️ How to Use
+## Scripts Included
 
-1. Download the script:
-   - `system_info.sh`
+### `desktop_cleanup.sh`
 
-2. Make it executable:
-   ```bash
-   chmod +x system_info.sh
-   ```
+Organizes all files from your Desktop into `Desktop Cleanup/Documents`, `Media`, and `Other`.
 
-3. Run the script:
-   ```bash
-   ./system_info.sh
-   ```
+### `desktop_restore.sh`
+
+Restores files from the `Desktop Cleanup` folder back to their original location on the Desktop.
 
 ---
 
-## 🧾 Example Output
+## How to Use
 
-```
-===============================
-🖥️  BASIC MAC SYSTEM INFO
-===============================
+### Step 1: Download the Scripts
 
-🔧 Hardware:
-  🧠 Memory (RAM):         16 GB
-  ⚙️  Processor (CPU):      Apple M1 Pro
-  💻 Mac Model Identifier: MacBookPro18,3
+Place both of these scripts directly on your Mac Desktop:
 
-💽 Storage:
-  📦 Disk Space:
-    Total:     494 GB
-    Used:      210 GB
-    Available: 284 GB
+- `desktop_cleanup.sh`
+- `desktop_restore.sh`
 
-🧾 Software:
-  macOS Version: 13.6.1
-  ⏱️  Uptime:       2 days, 5:23
+### Step 2: Make Them Executable
 
-🌐 Network:
-  👤 Current User:    amiel
-  🌍 Local IP Address: 192.168.1.24
+Open Terminal and run:
 
-🔋 Power:
-  Battery: 84% (charging)
-
-===============================
+```bash
+chmod +x ~/Desktop/desktop_cleanup.sh
+chmod +x ~/Desktop/desktop_restore.sh
 ```
 
+### Step 3: Run the Cleanup Script
+
+```bash
+~/Desktop/desktop_cleanup.sh
+```
+
+### Step 4: Restore (If Needed)
+
+```bash
+~/Desktop/desktop_restore.sh
+```
+
+> **Note:** These scripts will not move themselves. They are always left on your Desktop for easy access.
+
 ---
 
-## 🔁 If Something Goes Wrong
+## Example Output
 
-No system changes are made — this is read-only. If anything looks off, you can simply re-run the script or review it before use. It’s yours to modify, expand, and learn from.
+```
+========== RESULTS ==========
+
+Documents:
+Moved report.docx to Documents (1.23 MB)
+Moved notes.txt to Documents (0.75 MB)
+
+Media:
+Moved vacation.jpg to Media (2.01 MB)
+
+Other:
+Moved setup.sh to Other (0.30 MB)
+
+========== SUMMARY ==========
+Documents: 2 file(s), 1.98 MB
+Media:     1 file(s), 2.01 MB
+Other:     1 file(s), 0.30 MB
+
+Desktop cleanup complete.
+```
 
 ---
 
-### 🧙🏾‍♂️‍ Created by [Amiel Terry](https://amielterry.me) & Arcane Systems LLC
+## Disclaimer
+
+This script **moves files** from your Desktop into categorized folders. No files are deleted. Always test responsibly.
+
+---
+
+## License
+
+MIT License — use freely, modify responsibly.
+
+---
+
+## Author
+
+Crafted with obsessive attention to detail by 🧙🏾‍♂️‍ [Amiel Terry](https://amielterry.me) & Arcane Systems LLC
