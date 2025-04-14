@@ -1,38 +1,22 @@
 #!/bin/bash
 
-# Set directories
+# Set base directories
 DESKTOP="$HOME/Desktop"
-CLEANUP_DIR="$DESKTOP/Desktop Cleanup"
-DOCS_DIR="$CLEANUP_DIR/Documents"
-MEDIA_DIR="$CLEANUP_DIR/Media"
-OTHER_DIR="$CLEANUP_DIR/Other"
+CLEANUP_BASE="$DESKTOP/Desktop Cleanup"
+TODAY=$(date +"%Y-%m-%d")
+RUN_DIR="$CLEANUP_BASE/$TODAY"
+ORG_DIR="$RUN_DIR/Organized"
+ALL_DIR="$RUN_DIR/All Files"
 
+# Create directory structure
 echo
-echo "==> Checking for Desktop Cleanup folder..."
-sleep 0.05
-
-# Create directories if they don't exist
-if [[ ! -d "$CLEANUP_DIR" ]]; then
-    echo "No Desktop Cleanup folder detected. Creating structure..."
-else
-    echo "Desktop Cleanup folder already exists. Skipping creation."
-fi
-mkdir -p "$DOCS_DIR" "$MEDIA_DIR" "$OTHER_DIR"
-sleep 0.05
+echo "==> Setting up folder structure for today's cleanup..."
+mkdir -p "$ORG_DIR/Documents" "$ORG_DIR/Media" "$ORG_DIR/Other" "$ALL_DIR"
 
 # Initialize counters and size trackers
-docs_count=0
-media_count=0
-other_count=0
-
-docs_size=0
-media_size=0
-other_size=0
-
-# Prepare grouped logs
-docs_log=""
-media_log=""
-other_log=""
+docs_count=0; media_count=0; other_count=0
+docs_size=0; media_size=0; other_size=0
+docs_log=""; media_log=""; other_log=""
 
 echo
 echo "==> Scanning Desktop files and transferring..."
@@ -41,9 +25,9 @@ sleep 0.05
 # Loop through files on Desktop
 for FILE in "$DESKTOP"/*; do
     FILENAME=$(basename "$FILE")
-    
-    # Skip folders, the cleanup folder, and this script or restore script
-    if [[ -d "$FILE" || "$FILE" == "$CLEANUP_DIR" || "$FILENAME" == "desktop_cleanup.sh" || "$FILENAME" == "desktop_restore.sh" ]]; then
+
+    # Skip self, restore script, and cleanup folder
+    if [[ -d "$FILE" || "$FILE" == "$CLEANUP_BASE" || "$FILENAME" == "desktop_cleanup.sh" || "$FILENAME" == "desktop_restore.sh" ]]; then
         continue
     fi
 
@@ -51,30 +35,31 @@ for FILE in "$DESKTOP"/*; do
     SIZE_BYTES=$(stat -f%z "$FILE")
     SIZE_MB=$(echo "scale=2; $SIZE_BYTES / 1024 / 1024" | bc)
 
-    # Route file based on extension
     case "$EXT" in
         pdf|doc|docx|txt|xlsx|xls|ppt|pptx)
-            mv "$FILE" "$DOCS_DIR/$FILENAME"
+            mv "$FILE" "$ORG_DIR/Documents/$FILENAME"
+            cp "$ORG_DIR/Documents/$FILENAME" "$ALL_DIR/$FILENAME"
             docs_log+=$'\n'"Moved $FILENAME to Documents (${SIZE_MB} MB)"
-            sleep 0.05
             ((docs_count++))
             docs_size=$(echo "$docs_size + $SIZE_MB" | bc)
             ;;
         jpg|jpeg|png|gif|mp4|mov|avi|mp3|wav)
-            mv "$FILE" "$MEDIA_DIR/$FILENAME"
+            mv "$FILE" "$ORG_DIR/Media/$FILENAME"
+            cp "$ORG_DIR/Media/$FILENAME" "$ALL_DIR/$FILENAME"
             media_log+=$'\n'"Moved $FILENAME to Media (${SIZE_MB} MB)"
-            sleep 0.05
             ((media_count++))
             media_size=$(echo "$media_size + $SIZE_MB" | bc)
             ;;
         *)
-            mv "$FILE" "$OTHER_DIR/$FILENAME"
+            mv "$FILE" "$ORG_DIR/Other/$FILENAME"
+            cp "$ORG_DIR/Other/$FILENAME" "$ALL_DIR/$FILENAME"
             other_log+=$'\n'"Moved $FILENAME to Other (${SIZE_MB} MB)"
-            sleep 0.05
             ((other_count++))
             other_size=$(echo "$other_size + $SIZE_MB" | bc)
             ;;
     esac
+
+    sleep 0.05
 done
 
 # Display grouped logs
@@ -97,4 +82,8 @@ echo "Documents: $docs_count file(s), ${docs_size} MB"
 echo "Media:     $media_count file(s), ${media_size} MB"
 echo "Other:     $other_count file(s), ${other_size} MB"
 echo
-echo "Desktop cleanup complete."
+echo "Files have been moved to:"
+echo "Organized:  $ORG_DIR"
+echo "All Files:  $ALL_DIR"
+echo
+echo "✅ Desktop cleanup complete for $TODAY."
