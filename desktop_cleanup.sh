@@ -36,7 +36,7 @@ for FILE in "$DESKTOP"/*; do
     SIZE_MB=$(echo "scale=2; $SIZE_BYTES / 1024 / 1024" | bc)
 
     case "$EXT" in
-        pdf|doc|docx|txt|xlsx|xls|ppt|pptx)
+        pdf|doc|docx|txt|xlsx|xls|ppt|pptx|csv)
             mv "$FILE" "$ORG_DIR/Documents/$FILENAME"
             cp "$ORG_DIR/Documents/$FILENAME" "$ALL_DIR/$FILENAME"
             docs_log+=$'\n'"Moved $FILENAME to Documents (${SIZE_MB} MB)"
