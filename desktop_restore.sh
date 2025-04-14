@@ -52,10 +52,6 @@ else
     echo "📁 Kept folder: $RESTORE_DIR"
 fi
 
-# Log to history file
-LOG_FILE="$CLEANUP_BASE/restore_log.txt"
-echo "$(date +"%Y-%m-%d %H:%M:%S") - Restored from $RESTORE_DATE ($count file[s])" >> "$LOG_FILE"
-
 echo
-echo "📝 Restore logged to: $LOG_FILE"
+echo "🗑️Desktop Cleanup folder removed."
 echo "✅ Desktop restore complete."
