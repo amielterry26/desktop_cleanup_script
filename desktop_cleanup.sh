@@ -20,7 +20,7 @@ docs_log=""; media_log=""; other_log=""
 
 echo
 echo "==> Scanning Desktop files and transferring..."
-sleep 0.05
+sleep 0.25
 
 # Loop through files on Desktop
 for FILE in "$DESKTOP"/*; do
@@ -38,21 +38,18 @@ for FILE in "$DESKTOP"/*; do
     case "$EXT" in
         pdf|doc|docx|txt|xlsx|xls|ppt|pptx|csv)
             mv "$FILE" "$ORG_DIR/Documents/$FILENAME"
-            cp "$ORG_DIR/Documents/$FILENAME" "$ALL_DIR/$FILENAME"
             docs_log+=$'\n'"Moved $FILENAME to Documents (${SIZE_MB} MB)"
             ((docs_count++))
             docs_size=$(echo "$docs_size + $SIZE_MB" | bc)
             ;;
         jpg|jpeg|png|gif|mp4|mov|avi|mp3|wav)
             mv "$FILE" "$ORG_DIR/Media/$FILENAME"
-            cp "$ORG_DIR/Media/$FILENAME" "$ALL_DIR/$FILENAME"
             media_log+=$'\n'"Moved $FILENAME to Media (${SIZE_MB} MB)"
             ((media_count++))
             media_size=$(echo "$media_size + $SIZE_MB" | bc)
             ;;
         *)
             mv "$FILE" "$ORG_DIR/Other/$FILENAME"
-            cp "$ORG_DIR/Other/$FILENAME" "$ALL_DIR/$FILENAME"
             other_log+=$'\n'"Moved $FILENAME to Other (${SIZE_MB} MB)"
             ((other_count++))
             other_size=$(echo "$other_size + $SIZE_MB" | bc)
@@ -61,6 +58,13 @@ for FILE in "$DESKTOP"/*; do
 
     sleep 0.05
 done
+
+# Copy files to All Files folder in grouped order
+echo
+echo "==> Copying files to All Files folder (grouped)..."
+cp "$ORG_DIR/Documents"/* "$ALL_DIR" 2>/dev/null
+cp "$ORG_DIR/Media"/* "$ALL_DIR" 2>/dev/null
+cp "$ORG_DIR/Other"/* "$ALL_DIR" 2>/dev/null
 
 # Display grouped logs
 echo
