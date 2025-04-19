@@ -1,7 +1,9 @@
+# Specific files
 READMEtest.md
 README_info_project.md
 *.html
 desktop-cleanup-email.html
+.gitignore
 
 # macOS System Files
 .DS_Store
